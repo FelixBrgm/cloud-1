@@ -43,6 +43,6 @@
     - name: Keyscan for github.com
       command: bash -c "ssh-keyscan github.com  >> ~/.ssh/known_hosts"
     - name: Get source code
-      command: git clone git@github.com:FelixBrgm/test.git /deployment/wp
+      command: git clone git@github.com:FelixBrgm/cloud-1.git /deployment/wp
     - name: Start docker daemon
       shell: sudo systemctl start docker
