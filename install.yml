@@ -26,11 +26,11 @@
       command: bash -c "rm -rf /deployment && mkdir /deployment"
 
     - name: Get source code
-      command: git clone https://github.com/FelixBrgm/cloud-1.git /deployment/wp
+      shell: rm -rf /deployment/* && git clone https://github.com/FelixBrgm/cloud-1.git /deployment/wp
     - name: Start docker daemon
       shell: sudo systemctl start docker
     - name: Start ufw for ssh & http
       shell: |
-        ufw enable http
-        ufw enable ssh
+        ufw allow http
+        ufw allow ssh
         yes | ufw enable
