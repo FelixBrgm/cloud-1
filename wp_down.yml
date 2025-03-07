@@ -1,0 +1,6 @@
+- name: Shut wordpress down
+  hosts: all
+  remote_user: root
+  tasks:
+  - name: Docker compose down 
+    shell: cd /deployment/wp && docker compose down

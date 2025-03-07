@@ -1,0 +1,6 @@
+- name: Start Wordpress
+  hosts: all
+  remote_user: root
+  tasks:
+  - name: Docker compose up
+    shell: cd /deployment/wp && docker compose up -d

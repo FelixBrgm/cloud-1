@@ -5,11 +5,10 @@
   tasks:
     - name: apt-get Update
       command: apt-get update
-    - name: apt-get install docker
-      command: apt-get install docker.io -y
+    - name: Install containerd
+      command: apt-get install containerd -y
     - name: apt-get install docker compose
       shell: |
-        sudo apt-get update
         sudo apt-get install ca-certificates curl
         sudo install -m 0755 -d /etc/apt/keyrings
         sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -18,6 +17,8 @@
         echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         sudo apt-get update
 
+    - name: apt-get install docker
+      command: apt-get install docker.io -y
     - name: Installing docker compose really
       command: sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
@@ -41,5 +42,7 @@
 
     - name: Keyscan for github.com
       command: bash -c "ssh-keyscan github.com  >> ~/.ssh/known_hosts"
-    - name: Clone inception repo
-      command: git clone git@github.com:FelixBrgm/42-inception.git /deployment/incpetion
+    - name: Get source code
+      command: git clone git@github.com:FelixBrgm/test.git /deployment/wp
+    - name: Start docker daemon
+      shell: sudo systemctl start docker
